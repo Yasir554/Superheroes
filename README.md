@@ -2,7 +2,20 @@
 
 A RESTful Flask API to manage superheroes, their powers, and their power strengths. Built with Flask, SQLAlchemy, and SQLite, this project allows clients to create, read, and update data for heroes and their abilities.
 
----
+## Table of Contents
+
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Database Setup](#database-setup)
+- [Seeding the Database](#seeding-the-database)
+- [Running the Server](#running-the-server)
+- [API Endpoints](#api-endpoints)
+- [Validation Rules](#validation-rules)
+- [Example Usage](#example-usage)
+- [Notes](#notes)
+- [Author](#author)
 
 ## 🚀 Features
 
@@ -13,142 +26,139 @@ A RESTful Flask API to manage superheroes, their powers, and their power strengt
 - Assign powers to heroes with strength levels (Strong, Weak, Average)
 - Seed database with sample data
 
----
-
 ## 📁 Project Structure
 
 ```bash
+.
 ├── app.py            # Main application with API routes
 ├── models.py         # SQLAlchemy models and validations
 ├── seed.py           # Seeds the database with heroes and powers
 ├── Pipfile           # Project dependencies
 └── migrations/       # Flask-Migrate migration folder (auto-generated)
-📦 Requirements
-Python 3.8+
+```
 
-pipenv
+## 📦 Requirements
 
-🛠 Installation
-Clone the repository
+- Python 3.8+
+- pipenv
 
-bash
-Copy
-Edit
-git clone https://github.com/your-username/superpower-api.git
-cd superpower-api
-Install dependencies
+## 🛠 Installation
 
-bash
-Copy
-Edit
-pipenv install
-Activate virtual environment
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/superpower-api.git
+   cd superpower-api
+   ```
+2. **Install dependencies**
+   ```bash
+   pipenv install
+   ```
+3. **Activate the virtual environment**
+   ```bash
+   pipenv shell
+   ```
 
-bash
-Copy
-Edit
-pipenv shell
-Set up the database
+## 🗄️ Database Setup
 
-bash
-Copy
-Edit
+```bash
 flask db init
 flask db migrate -m "Initial migration."
 flask db upgrade
-Seed the database
+```
 
-bash
-Copy
-Edit
+## 🌱 Seeding the Database
+
+```bash
 python seed.py
-Run the server
+```
 
-bash
-Copy
-Edit
+## ▶️ Running the Server
+
+```bash
 python app.py
-Server will start at http://localhost:5555.
+```
+The server will start at `http://localhost:5555`.
 
-🔌 API Endpoints
-Root
-GET /
-Returns a welcome message.
+## 🔌 API Endpoints
 
-Heroes
-GET /heroes
-Returns a list of all heroes.
+### Root
 
-GET /heroes/<id>
-Returns detailed information about a specific hero.
+- `GET /`  
+  Returns a welcome message.
 
-Powers
-GET /powers
-Returns a list of all powers.
+### Heroes
 
-GET /powers/<id>
-Returns a specific power by ID.
+- `GET /heroes`  
+  Returns a list of all heroes.
 
-PATCH /powers/<id>
-Update the description of a power.
-Body JSON:
+- `GET /heroes/<id>`  
+  Returns detailed information about a specific hero.
 
-json
-Copy
-Edit
-{
-  "description": "Updated description here"
-}
-Hero Powers
-POST /hero_powers
-Assign a power to a hero with strength.
-Body JSON:
+### Powers
 
-json
-Copy
-Edit
-{
-  "strength": "Strong",
-  "power_id": 1,
-  "hero_id": 3
-}
-⚙️ Validation Rules
-Power description must be at least 20 characters.
+- `GET /powers`  
+  Returns a list of all powers.
 
-strength must be either "Strong", "Weak", or "Average".
+- `GET /powers/<id>`  
+  Returns a specific power by ID.
 
-🧪 Example Usage (Postman)
-Add a power to a hero:
+- `PATCH /powers/<id>`  
+  Update the description of a power.  
+  **Request Body:**
+  ```json
+  {
+    "description": "Updated description here"
+  }
+  ```
 
-POST to /hero_powers
+### Hero Powers
 
-Body:
+- `POST /hero_powers`  
+  Assign a power to a hero with strength.  
+  **Request Body:**
+  ```json
+  {
+    "strength": "Strong",
+    "power_id": 1,
+    "hero_id": 3
+  }
+  ```
 
-json
-Copy
-Edit
-{
-  "strength": "Strong",
-  "hero_id": 1,
-  "power_id": 2
-}
-Update a power:
+## ⚙️ Validation Rules
 
-PATCH to /powers/1
+- Power description must be at least 20 characters.
+- Strength must be one of: `"Strong"`, `"Weak"`, or `"Average"`.
 
-Body:
+## 🧪 Example Usage (Postman)
 
-json
-Copy
-Edit
-{
-  "description": "Gives the ability to manipulate time and space"
-}
-📌 Notes
-The project uses SQLite for local storage.
+### Add a Power to a Hero
 
-All database models use SQLAlchemy and include serialization via sqlalchemy-serializer.
+- **Endpoint:** `POST /hero_powers`  
+- **Body:**
+  ```json
+  {
+    "strength": "Strong",
+    "hero_id": 1,
+    "power_id": 2
+  }
+  ```
 
-🧑‍💻 Author
+### Update a Power
+
+- **Endpoint:** `PATCH /powers/1`  
+- **Body:**
+  ```json
+  {
+    "description": "Gives the ability to manipulate time and space"
+  }
+  ```
+
+## 📌 Notes
+
+- The project uses SQLite for local storage.
+- All database models use SQLAlchemy and include serialization via `sqlalchemy-serializer`.
+
+## 🧑‍💻 Author
+
 Yasir Abass
 
